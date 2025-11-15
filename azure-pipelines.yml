@@ -13,7 +13,7 @@ stages:
         - task: DockerInstaller@0
           displayName: Install docker CLI on agent machine
           inputs:
-            dockerVersion: '17.09.0-ce'
+            dockerVersion: '29.0.1'
         
         - task: DockerCompose@1
           displayName: Build Services
