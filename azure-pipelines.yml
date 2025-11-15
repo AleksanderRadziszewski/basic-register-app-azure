@@ -13,6 +13,6 @@ stages:
             displayName: Build Services
             inputs:
               containerregistrytype: 'Container Registry'
-              dockerRegistryEndpoint: 'docker'
+              dockerRegistryEndpoint: 'docker-service-connection'
               dockerComposeFile: 'docker-compose.yml'
               action: 'Build services'
