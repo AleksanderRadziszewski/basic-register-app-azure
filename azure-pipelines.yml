@@ -5,11 +5,14 @@ stages:
   - stage: Build
     jobs:
       - job: Build
+        displayName: Build job
         pool: br-agent
 
         steps:
-        - task: DockerCompose@1
-          displayName: Container registry login
-          inputs:
-            containerregistrytype: Container Registry
-            dockerRegistryEndpoint: docker
+          - task: DockerCompose@1
+            displayName: Build Services
+            inputs:
+              containerregistrytype: 'Container Registry'
+              dockerRegistryEndpoint: 'docker'
+              dockerComposeFile: 'docker-compose.yml'
+              action: 'Build services'
