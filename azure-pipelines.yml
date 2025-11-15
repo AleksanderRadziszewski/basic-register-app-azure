@@ -9,10 +9,16 @@ stages:
         pool: br-agent
 
         steps:
-          - task: DockerCompose@1
-            displayName: Build Services
-            inputs:
-              containerregistrytype: 'Container Registry'
-              dockerRegistryEndpoint: 'docker-service-connection'
-              dockerComposeFile: 'docker-compose.yml'
-              action: 'Build services'
+
+        - task: DockerInstaller@0
+          displayName: Install docker CLI on agent machine
+          inputs:
+            dockerVersion: '17.09.0-ce'
+        
+        - task: DockerCompose@1
+          displayName: Build Services
+          inputs:
+            containerregistrytype: 'Container Registry'
+            dockerRegistryEndpoint: 'docker-service-connection'
+            dockerComposeFile: 'docker-compose.yml'
+            action: 'Build services'
