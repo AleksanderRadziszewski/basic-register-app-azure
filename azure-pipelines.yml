@@ -1,41 +1,15 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- *
+- azure-pipeline-test
 
-# Docker Compose v0
-# Build, push or run multi-container Docker applications. Task can be used with Docker or Azure Container registry.
-- task: DockerCompose@0
-  inputs:
-    containerregistrytype: 'Container Registry'
-    dockerRegistryEndpoint: 'docker' 
-    dockerComposeFile: 'docker-compose.yml' 
-    #additionalDockerComposeFiles: # string. Additional Docker Compose Files. 
-    #dockerComposeFileArgs: # string. Environment Variables.
-    action: ['Build services,' 'Push services', 'Run services']
-    includeSourceTags: true
-    includeLatestTag: true
-    #buildImages: true # boolean. Optional. Use when action = Run services. Build Images. Default: true.
-    #serviceName: # string. Required when action = Run a specific service. Service Name. 
-    #containerName: # string. Optional. Use when action = Run a specific service. Container Name. 
-    #ports: # string. Optional. Use when action = Run a specific service. Ports. 
-    #workingDirectory: # string. Alias: workDir. Optional. Use when action = Run a specific service. Working Directory. 
-    #entrypoint: # string. Optional. Use when action = Run a specific service. Entry Point Override. 
-    #containerCommand: # string. Optional. Use when action = Run a specific service. Command. 
-    #detached: true # boolean. Optional. Use when action = Run services || action = Run a specific service. Run in Background. Default: true.
-    #abortOnContainerExit: true # boolean. Optional. Use when action = Run services && detached == false. Abort on Container Exit. Default: true.
-    #imageDigestComposeFile: '$(Build.StagingDirectory)/docker-compose.images.yml' # string. Required when action = Write service image digests. Image Digest Compose File. Default: $(Build.StagingDirectory)/docker-compose.images.yml.
-    #removeBuildOptions: false # boolean. Optional. Use when action = Lock services || action = Combine configuration. Remove Build Options. Default: false.
-    #baseResolveDirectory: # string. Optional. Use when action = Lock services || action = Combine configuration. Base Resolve Directory. 
-    #outputDockerComposeFile: '$(Build.StagingDirectory)/docker-compose.yml' # string. Required when action = Lock services || action = Combine configuration. Output Docker Compose File. Default: $(Build.StagingDirectory)/docker-compose.yml.
-    #dockerComposeCommand: # string. Required when action = Run a Docker Compose command. Command. 
-    #arguments: # string. Optional. Use when action != Lock services && action != Combine configuration && action != Write service image digests. Arguments. 
-  # Advanced Options
-    #dockerHostEndpoint: # string. Docker Host Service Connection. 
-    #nopIfNoDockerComposeFile: false # boolean. No-op if no Docker Compose File. Default: false.
-    #requireAdditionalDockerComposeFiles: false # boolean. Require Additional Docker Compose Files. Default: false.
-    #currentWorkingDirectory: '$(System.DefaultWorkingDirectory)' # string. Alias: cwd. Working Directory. Default: $(System.DefaultWorkingDirectory).
-    #dockerComposePath: # string. Docker Compose executable Path.
+stages:
+  - stage: Build
+    jobs:
+      - job: Build
+        pool: br-agent
+
+        steps:
+        - task: DockerCompose@0
+          displayName: Container registry login
+          inputs:
+            containerregistrytype: Container Registry
+            dockerRegistryEndpoint: docker
