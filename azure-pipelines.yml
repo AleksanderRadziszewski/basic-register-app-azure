@@ -4,25 +4,20 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+- *
 
 # Docker Compose v0
 # Build, push or run multi-container Docker applications. Task can be used with Docker or Azure Container registry.
 - task: DockerCompose@0
   inputs:
-    containerregistrytype: 'Azure Container Registry' # 'Azure Container Registry' | 'Container Registry'. Required. Container Registry Type. Default: Azure Container Registry.
-    #dockerRegistryEndpoint: # string. Optional. Use when containerregistrytype = Container Registry. Docker Registry Service Connection. 
-    #azureSubscription: # string. Alias: azureSubscriptionEndpoint. Optional. Use when containerregistrytype = Azure Container Registry. Azure subscription. 
-    #azureContainerRegistry: # string. Optional. Use when containerregistrytype = Azure Container Registry. Azure Container Registry. 
-    dockerComposeFile: '**/docker-compose.yml' # string. Required. Docker Compose File. Default: **/docker-compose.yml.
+    containerregistrytype: 'Container Registry'
+    dockerRegistryEndpoint: 'docker' 
+    dockerComposeFile: 'docker-compose.yml' 
     #additionalDockerComposeFiles: # string. Additional Docker Compose Files. 
-    #dockerComposeFileArgs: # string. Environment Variables. 
-    #projectName: '$(Build.Repository.Name)' # string. Project Name. Default: $(Build.Repository.Name).
-    #qualifyImageNames: true # boolean. Qualify Image Names. Default: true.
-    action: 'Run a Docker Compose command' # 'Build services' | 'Push services' | 'Run services' | 'Run a specific service' | 'Lock services' | 'Write service image digests' | 'Combine configuration' | 'Run a Docker Compose command'. Required. Action. Default: Run a Docker Compose command.
-    #additionalImageTags: # string. Optional. Use when action = Build services || action = Push services. Additional Image Tags. 
-    #includeSourceTags: false # boolean. Optional. Use when action = Build services || action = Push services. Include Source Tags. Default: false.
-    #includeLatestTag: false # boolean. Optional. Use when action = Build services || action = Push services. Include Latest Tag. Default: false.
+    #dockerComposeFileArgs: # string. Environment Variables.
+    action: ['Build services,' 'Push services', 'Run services']
+    includeSourceTags: true
+    includeLatestTag: true
     #buildImages: true # boolean. Optional. Use when action = Run services. Build Images. Default: true.
     #serviceName: # string. Required when action = Run a specific service. Service Name. 
     #containerName: # string. Optional. Use when action = Run a specific service. Container Name. 
