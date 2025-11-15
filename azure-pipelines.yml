@@ -8,7 +8,7 @@ stages:
         pool: br-agent
 
         steps:
-        - task: DockerCompose@0
+        - task: DockerCompose@1
           displayName: Container registry login
           inputs:
             containerregistrytype: Container Registry
