@@ -21,4 +21,7 @@ stages:
             containerregistrytype: 'Container Registry'
             dockerRegistryEndpoint: 'docker-service-connection'
             dockerComposeFile: 'docker-compose.yml'
+            additionalDockerComposeFiles: |
+              docker-compose.override.yml
+              docker-compose.traefik.yml
             action: 'Build services'
