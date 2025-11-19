@@ -32,6 +32,7 @@ stages:
             additionalDockerComposeFiles: |
               docker-compose.override.yml
               docker-compose.traefik.yml
+            dockerComposePath: docker-compose.yml
             action: 'Build services'
             
 
