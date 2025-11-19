@@ -10,15 +10,24 @@ stages:
 
         steps:
 
-        - task: DockerInstaller@0
-          displayName: Install docker CLI on agent machine
+        # - task: DockerInstaller@0
+        #   displayName: Install docker CLI on agent machine
+        #   inputs:
+        #     dockerVersion: '28.5.2'
+        - task: DockerCompose@1
           inputs:
-            dockerVersion: '28.5.2'
+            containerregistrytype: 'Container Registry'
+            dockerRegistryEndpoint: 'docker-service-connection'
+            dockerComposeFile: '**/docker-compose.yml'
+            action: 'Run a Docker Compose command'
+            dockerComposeCommand: |
+              version
+              -f
 
-        - script: | 
-           docker compose version 
-           docker -v
-           docker compose -f test.yml
+        # - script: | 
+        #    docker compose version 
+        #    docker -v
+        #    docker compose -f test.yml
         
         # - task: DockerCompose@1
         #   displayName: Build Services
