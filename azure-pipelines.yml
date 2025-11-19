@@ -21,9 +21,12 @@ stages:
             containerregistrytype: 'Container Registry'
             dockerRegistryEndpoint: 'docker-service-connection'
             dockerComposeFile: 'docker-compose.yml'
+            requireAdditionalDockerComposeFiles: true
             additionalDockerComposeFiles: |
               docker-compose.override.yml
               docker-compose.traefik.yml
+
+
             # dockerComposeFileArgs: |
             
             #   DOMAIN=localhost
