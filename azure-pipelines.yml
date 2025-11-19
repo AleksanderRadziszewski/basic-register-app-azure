@@ -14,17 +14,22 @@ stages:
           displayName: Install docker CLI on agent machine
           inputs:
             dockerVersion: '28.5.2'
+
+        - script: | 
+           docker compose version 
+           docker -v
+           docker compose -f test.yml
         
-        - task: DockerCompose@1
-          displayName: Build Services
-          inputs:
-            containerregistrytype: 'Container Registry'
-            dockerRegistryEndpoint: 'docker-service-connection'
-            dockerComposeFile: 'docker-compose.yml'
-            requireAdditionalDockerComposeFiles: true
-            additionalDockerComposeFiles: |
-              docker-compose.override.yml
-              docker-compose.traefik.yml
+        # - task: DockerCompose@1
+        #   displayName: Build Services
+        #   inputs:
+        #     containerregistrytype: 'Container Registry'
+        #     dockerRegistryEndpoint: 'docker-service-connection'
+        #     dockerComposeFile: 'docker-compose.yml'
+        #     requireAdditionalDockerComposeFiles: true
+        #     additionalDockerComposeFiles: |
+        #       docker-compose.override.yml
+        #       docker-compose.traefik.yml
 
 
             # dockerComposeFileArgs: |
@@ -61,4 +66,4 @@ stages:
             #   DOCKER_IMAGE_BACKEND=backend
             #   DOCKER_IMAGE_FRONTEND=frontend
               
-            action: 'Build services'
+            # action: 'Build services'
