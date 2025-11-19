@@ -1,6 +1,9 @@
 trigger:
 - azure-pipeline-test
 
+variables:
+    dockerComposePath: /tmp/docker-compose
+
 stages:
   - stage: Build
     jobs:
@@ -16,11 +19,9 @@ stages:
             dockerVersion: '28.5.2'
 
         - script: |
-            mkdir -p ~/.docker/cli-plugins/
-            curl -SL https://github.com/docker/compose/releases/download/v2.29.2/docker-compose-linux-x86_64 \
-            -o ~/.docker/cli-plugins/docker-compose
-            chmod +x ~/.docker/cli-plugins/docker-compose
-            which docker-compose
+            sudo mkdir $(dockerComposePath)
+            sudo curl -SL https://github.com/docker/compose/releases/download/v2.40.3/docker-compose-linux-x86_64 -o $(dockerComposePath)/docker-compose
+            sudo chmod 755 $(dockerComposePath)/docker-compose
 
         - task: DockerCompose@1
           displayName: Build Services
@@ -32,7 +33,7 @@ stages:
             additionalDockerComposeFiles: |
               docker-compose.override.yml
               docker-compose.traefik.yml
-            dockerComposePath: ~/.docker/cli-plugins/docker-compose
+            dockerComposePath: $(dockerComposePath)/docker-compose
             action: 'Build services'
             
 
