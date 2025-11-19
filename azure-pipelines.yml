@@ -20,7 +20,19 @@ stages:
             curl -SL https://github.com/docker/compose/releases/download/v2.29.2/docker-compose-linux-x86_64 \
             -o ~/.docker/cli-plugins/docker-compose
             chmod +x ~/.docker/cli-plugins/docker-compose
-            docker compose -f test.yml
+            docker compose
+
+        - task: DockerCompose@1
+          displayName: Build Services
+          inputs:
+            containerregistrytype: 'Container Registry'
+            dockerRegistryEndpoint: 'docker-service-connection'
+            dockerComposeFile: 'docker-compose.yml'
+            requireAdditionalDockerComposeFiles: true
+            additionalDockerComposeFiles: |
+              docker-compose.override.yml
+              docker-compose.traefik.yml
+            action: 'Build services'
             
 
         # - script: | 
@@ -28,16 +40,6 @@ stages:
         #    docker -v
         #    docker compose -f test.yml
         
-        # - task: DockerCompose@1
-        #   displayName: Build Services
-        #   inputs:
-        #     containerregistrytype: 'Container Registry'
-        #     dockerRegistryEndpoint: 'docker-service-connection'
-        #     dockerComposeFile: 'docker-compose.yml'
-        #     requireAdditionalDockerComposeFiles: true
-        #     additionalDockerComposeFiles: |
-        #       docker-compose.override.yml
-        #       docker-compose.traefik.yml
 
 
             # dockerComposeFileArgs: |
@@ -74,4 +76,3 @@ stages:
             #   DOCKER_IMAGE_BACKEND=backend
             #   DOCKER_IMAGE_FRONTEND=frontend
               
-            # action: 'Build services'
