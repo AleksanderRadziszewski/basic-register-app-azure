@@ -10,10 +10,15 @@ stages:
 
         steps:
 
-        # - task: DockerInstaller@0
-        #   displayName: Install docker CLI on agent machine
-        #   inputs:
-        #     dockerVersion: '28.5.2'
+        - task: DockerInstaller@0
+          displayName: Install docker CLI on agent machine
+          inputs:
+            dockerVersion: '28.5.2'
+
+        - script: |
+           docker -v
+           which docker
+            
         - task: DockerCompose@1
           inputs:
             containerregistrytype: 'Container Registry'
