@@ -2,6 +2,7 @@ trigger:
 - azure-pipeline-test
 
 variables:
+    template: variables.yml
     dockerComposePath: /tmp/docker-compose
 
 stages:
