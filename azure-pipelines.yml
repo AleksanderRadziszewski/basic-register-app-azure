@@ -72,6 +72,7 @@ stages:
               
               DOCKER_IMAGE_BACKEND=backend
               DOCKER_IMAGE_FRONTEND=frontend
+              EMAIL=radziszewski.aleksander@gmail.com
             action: 'Build services'
             
 
