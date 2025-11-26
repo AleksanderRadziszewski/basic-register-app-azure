@@ -22,7 +22,7 @@ stages:
             command: 'buildAndPush'
             Dockerfile: 'backend/Dockerfile'
             buildContext: '/backend'
-            tags: '$(Build.Build.SourceVersion)'
+            tags: '$(Build.SourceVersion)'
 
         
 
