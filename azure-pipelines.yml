@@ -20,7 +20,7 @@ stages:
             containerRegistry: 'docker-service-connection'
             repository: 'basic_register_app'
             command: 'buildAndPush'
-            Dockerfile: '/backend/Dockerfile'
+            Dockerfile: 'backend/Dockerfile'
             buildContext: '/backend'
             tags: '$(Build.Build.SourceVersion)'
 
