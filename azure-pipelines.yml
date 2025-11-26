@@ -21,7 +21,7 @@ stages:
             repository: 'basic_register_app'
             command: 'buildAndPush'
             Dockerfile: 'backend/Dockerfile'
-            buildContext: '/backend'
+            buildContext: 'backend'
             tags: '$(Build.SourceVersion)'
 
         
