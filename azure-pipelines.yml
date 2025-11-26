@@ -22,7 +22,7 @@ stages:
             command: 'build'
             Dockerfile: 'backend/Dockerfile'
             buildContext: 'backend'
-            tags: '$(Build.SourceVersion)'
+            tags: '$(Build.BuildId)'
 
         
 
