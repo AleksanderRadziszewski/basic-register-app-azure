@@ -9,6 +9,12 @@ stages:
         pool: br-agent
 
         steps:
+
+        - task: DockerInstaller@0
+          displayName: Install docker CLI on agent machine
+          inputs:
+            dockerVersion: '28.5.2'
+
         - task: Docker@2
           inputs:
             containerRegistry: 'docker-service-connection'
