@@ -9,10 +9,11 @@ stages:
         pool: br-agent
 
         steps:
-
-        - script: |
-            whoami
-            whereis docker
-          # docker inspect --format '{{join .Args " , "}}'
-          # docker -v
-        # chmod +x /mnt/vss
+        - task: Docker@2
+          inputs:
+            containerRegistry: 'docker-service-connection'
+            repository: 'basic_register_app'
+            command: 'build'
+            Dockerfile: 'backend/Dockerfile'
+            buildContext: 'backend'
+            tags: '$(Build.SourceVersion)'
