@@ -9,15 +9,12 @@ stages:
         pool: br-agent
 
         steps:
-
-        - task: DockerInstaller@0
-          inputs:
-            dockerVersion: '28.5.2'
-
         - script: |
+            curl -fsSL https://get.docker.com -o get-docker.sh
+            sudo sh ./get-docker.sh --dry-run
             systemctl status docker
-            docker build -f backend/Dockerfile -t backend:latest .
-          displayName: Build backend image
+              # docker build -f backend/Dockerfile -t backend:latest .
+          # displayName: Build backend image
 
         # - task: Docker@2
         #   inputs:
