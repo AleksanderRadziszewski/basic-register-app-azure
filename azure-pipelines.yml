@@ -10,20 +10,6 @@ stages:
 
         steps:
 
-        - task: DockerInstaller@0
-          displayName: Install docker CLI on agent machine
-          inputs:
-            dockerVersion: '28.5.2'
-
-        - task: Docker@2
-          inputs:
-            containerRegistry: 'docker-service-connection'
-            repository: 'basic_register_app'
-            command: 'build'
-            Dockerfile: 'backend/Dockerfile'
-            buildContext: 'backend'
-            tags: '$(Build.BuildId)'
-
-        
-
-        
+        - script: |
+            docker inspect --format '{{join .Args " , "}}'
+            docker -v
