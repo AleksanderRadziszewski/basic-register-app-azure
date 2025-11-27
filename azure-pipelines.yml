@@ -17,14 +17,9 @@ stages:
             sudo apt update
             sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
             sudo systemctl status docker
-              # docker build -f backend/Dockerfile -t backend:latest .
-          # displayName: Build backend image
+          displayName: Install docker
 
-        # - task: Docker@2
-        #   inputs:
-        #     containerRegistry: 'docker-service-connection'
-        #     repository: 'basic_register_app'
-        #     command: 'build'
-        #     Dockerfile: 'backend/Dockerfile'
-        #     buildContext: 'backend'
-        #     tags: '$(Build.SourceVersion)'
+        - script: |
+              docker build -f backend/Dockerfile -t backend:latest .
+          displayName: Build backend 
+
