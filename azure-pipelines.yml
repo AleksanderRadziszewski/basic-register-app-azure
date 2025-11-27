@@ -10,6 +10,10 @@ stages:
 
         steps:
 
+        - task: DockerInstaller@0
+          inputs:
+            dockerVersion: '28.5.2'
+
         - script: | 
             which docker
             docker -v
