@@ -9,11 +9,13 @@ stages:
         pool: br-agent
 
         steps:
-        - task: Docker@2
-          inputs:
-            containerRegistry: 'docker-service-connection'
-            repository: 'basic_register_app'
-            command: 'build'
-            Dockerfile: 'backend/Dockerfile'
-            buildContext: 'backend'
-            tags: '$(Build.SourceVersion)'
+
+        - script: which docker
+        # - task: Docker@2
+        #   inputs:
+        #     containerRegistry: 'docker-service-connection'
+        #     repository: 'basic_register_app'
+        #     command: 'build'
+        #     Dockerfile: 'backend/Dockerfile'
+        #     buildContext: 'backend'
+        #     tags: '$(Build.SourceVersion)'
