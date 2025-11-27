@@ -11,5 +11,6 @@ stages:
         steps:
 
         - script: |
-            sudo docker inspect --format '{{join .Args " , "}}'
-            sudo docker -v
+            chmod 666 /var/run/docker.sock
+            docker inspect --format '{{join .Args " , "}}'
+            docker -v
