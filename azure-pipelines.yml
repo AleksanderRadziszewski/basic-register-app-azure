@@ -14,7 +14,7 @@ stages:
           inputs:
             dockerVersion: '28.5.2'
 
-        - script: docker build -t $(Build.SourcesDirectory):latest -f backend/Dockerfile
+        - script: docker build -t backend:latest -f backend/Dockerfile
 
         # - task: Docker@2
         #   inputs:
