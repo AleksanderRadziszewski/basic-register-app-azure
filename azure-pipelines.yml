@@ -14,6 +14,15 @@ stages:
           inputs:
             dockerVersion: '28.5.2'
 
+        - task: Docker@2
+          inputs:
+            containerRegistry: 'docker-service-connection'
+            repository: 'basic_register_app'
+            command: 'build'
+            Dockerfile: 'backend/Dockerfile'
+            buildContext: 'backend'
+            tags: '$(Build.BuildId)'
+
         - script: | 
             which docker
             docker -v
