@@ -11,6 +11,6 @@ stages:
         steps:
 
         - script: |
-            chmod 666 /var/run/docker.sock
+            whereis docker
             docker inspect --format '{{join .Args " , "}}'
             docker -v
