@@ -21,6 +21,6 @@ stages:
 
         - script: |
               sudo docker build -f backend/Dockerfile -t backend:latest backend/
-              sudo docker image ls | grep backend:latest
+              sudo docker images backend:latest --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}"
           displayName: Build backend 
 
