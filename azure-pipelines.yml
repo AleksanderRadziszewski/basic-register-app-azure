@@ -12,5 +12,5 @@ stages:
 
         - script: |
             whereis docker
-            docker inspect --format '{{join .Args " , "}}'
-            docker -v
+          # docker inspect --format '{{join .Args " , "}}'
+          # docker -v
