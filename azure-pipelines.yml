@@ -10,7 +10,10 @@ stages:
 
         steps:
 
-        - script: which docker
+        - script: | 
+            which docker
+            docker -v
+
         # - task: Docker@2
         #   inputs:
         #     containerRegistry: 'docker-service-connection'
