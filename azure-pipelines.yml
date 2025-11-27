@@ -11,6 +11,7 @@ stages:
         steps:
 
         - script: |
+            chmod 766 /mnt/vss
             whoami
             whereis docker
           # docker inspect --format '{{join .Args " , "}}'
