@@ -12,7 +12,7 @@ stages:
         - script: |
             curl -fsSL https://get.docker.com -o get-docker.sh
             sudo sh ./get-docker.sh --dry-run
-            systemctl status docker
+            sudo systemctl status docker
               # docker build -f backend/Dockerfile -t backend:latest .
           # displayName: Build backend image
 
