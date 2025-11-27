@@ -21,6 +21,6 @@ stages:
 
         - script: |
               ls -al
-              sudo docker build -f backend/Dockerfile -t backend:latest .
+              sudo docker build -f backend/Dockerfile -t backend:latest backend/
           displayName: Build backend 
 
