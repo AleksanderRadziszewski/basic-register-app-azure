@@ -14,7 +14,10 @@ stages:
           inputs:
             dockerVersion: '28.5.2'
 
-        - script: docker build -f backend/Dockerfile -t backend:latest .
+        - script: |
+            systemctl status docker
+            docker build -f backend/Dockerfile -t backend:latest .
+          displayName: Build backend image
 
         # - task: Docker@2
         #   inputs:
