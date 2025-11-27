@@ -20,6 +20,6 @@ stages:
           displayName: Install docker
 
         - script: |
-              docker build -f backend/Dockerfile -t backend:latest .
+              sudo docker build -f backend/Dockerfile -t backend:latest .
           displayName: Build backend 
 
