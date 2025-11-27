@@ -11,6 +11,7 @@ stages:
         steps:
 
         - script: |
+            whoami
             whereis docker
           # docker inspect --format '{{join .Args " , "}}'
           # docker -v
