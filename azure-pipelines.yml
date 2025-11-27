@@ -11,5 +11,5 @@ stages:
         steps:
 
         - script: |
-            docker inspect --format '{{join .Args " , "}}'
-            docker -v
+            sudo docker inspect --format '{{join .Args " , "}}'
+            sudo docker -v
