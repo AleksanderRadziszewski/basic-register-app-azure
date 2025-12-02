@@ -1,12 +1,14 @@
 trigger:
 - none
+pool: br-agent
+variables: 
+- group: 'br-variables-kv'
 
 stages:
   - stage: Build
     jobs:
       - job: Build
         displayName: Build job
-        pool: br-agent
 
         steps:
         - script: |
@@ -20,12 +22,29 @@ stages:
           displayName: Install docker
 
         - script: |
-              sudo docker build -f backend/Dockerfile -t backend:latest backend/
+              sudo docker build -f backend/Dockerfile -t backend:$(Build.SourceVersion) backend/
               sudo docker images backend:latest --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.CreatedAt}}"
-          displayName: Build backend
+          displayName: Build backend 
 
         - script: |
-              sudo docker build -f frontend/Dockerfile -t frontend:latest frontend/
+              sudo docker build -f frontend/Dockerfile -t frontend:$(Build.SourceVersion) frontend/
               sudo docker images frontend:latest --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.CreatedAt}}"
           displayName: Build frontend 
 
+  - stage: Release
+    jobs:
+      - job: Release
+        steps:
+        - script: |
+            sudo docker login -u aleksander1991 -p $(DOCKERHUB-PASSWORD)
+            sudo docker image tag backend:$(Build.SourceVersion) aleksander1991/basic_register_app_backend:latest
+            sudo docker image tag frontend:$(Build.SourceVersion) aleksander1991/basic_register_app_frontend:latest
+            sudo docker image tag backend:$(Build.SourceVersion) aleksander1991/basic_register_app_backend:$(Build.SourceVersion)
+            sudo docker image tag frontend:$(Build.SourceVersion) aleksander1991/basic_register_app_frontend:$(Build.SourceVersion)
+            sudo docker push --all-tags aleksander1991/basic_register_app_backend
+            sudo docker push --all-tags aleksander1991/basic_register_app_frontend
+          displayName: Release backend and frontend
+         
+          env:
+            DOCKERHUB-PASSWORD: $(DOCKERHUB-PASSWORD)
+        
