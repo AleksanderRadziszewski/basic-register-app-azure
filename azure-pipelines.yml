@@ -34,15 +34,17 @@ stages:
   - stage: Release
     jobs:
       - job: Release
+        variables: 
+          dockerhub_user: aleksander1991
         steps:
         - script: |
-            sudo docker login -u aleksander1991 -p $(DOCKERHUB-PASSWORD)
-            sudo docker image tag backend:$(Build.SourceVersion) aleksander1991/basic_register_app_backend:latest
-            sudo docker image tag frontend:$(Build.SourceVersion) aleksander1991/basic_register_app_frontend:latest
-            sudo docker image tag backend:$(Build.SourceVersion) aleksander1991/basic_register_app_backend:$(Build.SourceVersion)
-            sudo docker image tag frontend:$(Build.SourceVersion) aleksander1991/basic_register_app_frontend:$(Build.SourceVersion)
-            sudo docker push --all-tags aleksander1991/basic_register_app_backend
-            sudo docker push --all-tags aleksander1991/basic_register_app_frontend
+            sudo docker login -u $(dockerhub_user) -p $(DOCKERHUB-PASSWORD)
+            sudo docker image tag backend:$(Build.SourceVersion) $(dockerhub_user)/basic_register_app_backend:latest
+            sudo docker image tag frontend:$(Build.SourceVersion) $(dockerhub_user)/basic_register_app_frontend:latest
+            sudo docker image tag backend:$(Build.SourceVersion) $(dockerhub_user)/basic_register_app_backend:$(Build.SourceVersion)
+            sudo docker image tag frontend:$(Build.SourceVersion) $(dockerhub_user)/basic_register_app_frontend:$(Build.SourceVersion)
+            sudo docker push --all-tags $(dockerhub_user)/basic_register_app_backend
+            sudo docker push --all-tags $(dockerhub_user)/basic_register_app_frontend
           displayName: Release backend and frontend
          
           env:
